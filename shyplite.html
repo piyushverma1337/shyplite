@@ -1,0 +1,53 @@
+<html>
+
+<body>
+    <div id="out">
+    </div>
+</body>
+
+</html>
+
+<script>
+    // Q1: Create a template string of a button HTML Element. Save the title
+    // for the button in a separate var and use it in the button correctly.
+
+    let btn_title = 'btn_title';
+    let btn = `<button>${btn_title}</button>`;
+    // document.getElementById('out').innerHTML = btn;
+
+    // Q2: Create a function that returns a list element (<li>) HTML
+    // use this function to create an ordered list HTML structure of numbers from 
+    // 1-30 without breaking the template string invocation i.e. usage of += is disallowed.
+
+    const listFn = (inpArr) => {
+        return ` <ul> ${inpArr.map((i) => `<li>${i + 1}</li>`).join('')} </ul>`;
+    };
+    
+    // document.getElementById('out').innerHTML = listFn([...Array(30).keys()]);
+
+    // Q3: Now only print the even numbers. Again, breaking the template string
+    // invocation is disallowed
+
+    document.getElementById('out').innerHTML = listFn([...Array(30).keys()].filter(elem => (elem % 2)));
+
+    // Q4: Create a promise that simulates a delay of 1-3s randomly. Create an array of 
+    // 10 such promises. Only print the output when all promises have been resolved.
+
+    let dlyPromise = () => {
+        return new Promise((resolve, reject) => {
+            let timeout = Math.floor(Math.random() * 3) + 1;
+            setTimeout(() => {
+                resolve('yay');
+                console.log('yay');
+            }, timeout * 1000);
+        });
+    };
+
+    let promiseArr = [...Array(10)].map(() => dlyPromise());
+
+    Promise.all(promiseArr).then((values) => {
+        console.log('done');
+    });
+
+
+</script>
